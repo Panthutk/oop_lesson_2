@@ -16,23 +16,24 @@ with open(os.path.join(__location__, 'Countries.csv')) as f:
     rows = csv.DictReader(f)
     for r in rows:
         countries.append(dict(r))
+
 players = []
 with open(os.path.join(__location__, "Players.csv")) as f:
     rows = csv.DictReader(f)
     for r in rows:
-        countries.append(dict(r))
+        players.append(dict(r))
 
 teams = []
 with open(os.path.join(__location__, "Teams.csv")) as f:
     rows = csv.DictReader(f)
     for r in rows:
-        countries.append(dict(r))
+        teams.append(dict(r))
 
 titanic = []
 with open(os.path.join(__location__, "Titanic.csv")) as f:
     rows = csv.DictReader(f)
     for r in rows:
-        countries.append(dict(r))
+        titanic.append(dict(r))
 
 
 class DB:
