@@ -167,7 +167,10 @@ rate_of_female_survived = len(my_table5_filtered_female_survived.table) / len(
 print("The survival rate of female")
 print(rate_of_female_survived)
 
-
+print("the total number of male passengers embarked at Southampton")
+my_table5_filtered_S = my_table5_filtered_male.filter(
+    lambda x: x["embarked"] == "Southampton")
+print(len(my_table5_filtered_S.table))
 # print("Test select: only displaying two fields, city and latitude, for cities in Italy")
 # my_table1_selected = my_table1_filtered.select(['city', 'latitude'])
 # print(my_table1_selected)
