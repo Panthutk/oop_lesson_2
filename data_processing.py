@@ -146,8 +146,26 @@ print("Average fare paid by passengers in the third class")
 print(my_table5_filtered.aggregate(lambda x: sum(x)/len(x), 'fare'))
 print()
 
-print("The average of  survival rate of male versus female passengers")
+print("The average of  survived rate of male versus female passengers")
 my_table5_filtered_male = my_table5.filter(lambda x: x["gender"] == "M")
+my_table5_filtered_male_survived = my_table5_filtered_male.filter(
+    lambda x: x["survived"] == "yes")
+my_table5_filtered_male_not_survived = my_table5.filter(
+    lambda x: x["survived"] == "no")
+rate_of_men_survived = len(my_table5_filtered_male_survived.table) / len(
+    my_table5_filtered_male_survived.table) + len(my_table5_filtered_male_not_survived.table)
+print("The survival rate of men")
+print(rate_of_men_survived)
+
+my_table5_filtered_female = my_table5.filter(lambda x: x["gender"] == "F")
+my_table5_filtered_female_survived = my_table5_filtered_female.filter(
+    lambda x: x["survived"] == "yes")
+my_table5_filtered_female_not_survived = my_table5_filtered_female.filter(
+    lambda x: x["survived"] == "no")
+rate_of_female_survived = len(my_table5_filtered_female_survived.table) / len(
+    my_table5_filtered_female_survived.table) + len(my_table5_filtered_female_not_survived.table)
+print("The survival rate of female")
+print(rate_of_female_survived)
 
 
 # print("Test select: only displaying two fields, city and latitude, for cities in Italy")
