@@ -1,7 +1,9 @@
 import copy
 import csv
 import os
-
+from itertools import product
+from tabulate import tabulate
+import combination_gen
 __location__ = os.path.realpath(
     os.path.join(os.getcwd(), os.path.dirname(__file__)))
 
@@ -179,7 +181,32 @@ rate_of_female_survived = len(my_table5_filtered_female_survived.table) / len(
 print("The survival rate of female")
 print(rate_of_female_survived)
 
+my_table4 = my_DB.search('teams')
+my_avg_1 = my_table4.filter(lambda x: float(x['ranking']) < 10).aggregate(
+    lambda x: sum(x)/len(x), 'games')
+my_avg_2 = my_table4.filter(lambda x: float(x['ranking']) >= 10).aggregate(
+    lambda x: sum(x)/len(x), 'games')
+print("Ranking < 10:", my_avg_1, "Rankin >= 10:", my_avg_2)
 
+# The average number of passes made by forwards versus by midfielders
+my_avg_1 = my_table3.filter(lambda x: x['position'] == 'forward').aggregate(
+    lambda x: sum(x)/len(x), 'passes')
+my_avg_2 = my_table3.filter(lambda x: x['position'] == 'midfielder').aggregate(
+    lambda x: sum(x)/len(x), 'passes')
+print("Forward:", my_avg_1, "Midfielder:", my_avg_2)
+
+# The average fare paid by passengers in the first class versus in the third class
+my_table5 = my_DB.search('titanic')
+my_avg_1 = my_table5.filter(lambda x: x['class'] == '1').aggregate(
+    lambda x: sum(x)/len(x), 'fare')
+my_avg_2 = my_table5.filter(lambda x: x['class'] == '3').aggregate(
+    lambda x: sum(x)/len(x), 'fare')
+print("First class:", my_avg_1, "Third class:", my_avg_2)
+
+# Find the total number of male passengers embarked at Southampton
+my_filtered_table = my_table5.filter(
+    lambda x: x['embarked'] == 'Southampton' and x['gender'] == 'M')
+print("Total number is", len(my_filtered_table.table))
 # print("Test select: only displaying two fields, city and latitude, for cities in Italy")
 # my_table1_selected = my_table1_filtered.select(['city', 'latitude'])
 # print(my_table1_selected)
